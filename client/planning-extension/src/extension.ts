@@ -14,6 +14,7 @@ import {IPlanningExtensionConfigurationOptions} from './extension_configuration_
 import {AutopostIngestRuleEditor} from './ingest_rule_autopost/AutopostIngestRuleEditor';
 import {AutopostIngestRulePreview} from './ingest_rule_autopost/AutopostIngestRulePreview';
 import {extensionBridge} from './extension_bridge';
+import {AssignmentsCountTracker} from './assignments-overview/hiddenAssignmentsList';
 
 function onSpike(superdesk: ISuperdesk, item: IArticle) {
     const {gettext} = superdesk.localization;
@@ -131,7 +132,7 @@ const extension: IExtension = {
                 notifications: {
                     'email:notification:assignments': {name: superdesk.localization.gettext('Assignment')}
                 },
-                globalMenuHorizontal: displayTopbarWidget ? [AssignmentsList] : [],
+                globalMenuHorizontal: [AssignmentsCountTracker, ...(displayTopbarWidget ? [AssignmentsList] : [])],
             },
         };
 
